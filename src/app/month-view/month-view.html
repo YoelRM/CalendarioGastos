@@ -1,1 +1,32 @@
-<p>month-view works!</p>
+<div class="month-view-container">
+  <div class="month-view-header">
+    <button (click)="goBack()">← Volver</button>
+    <h2>{{ monthName }} {{ year }}</h2>
+  </div>
+  <div class="month-view-content">
+    <div class="calendar-container">
+      <div class="weekdays">
+        <div>Lu</div> <div>Ma</div> <div>Mi</div> <div>Ju</div> <div>Vi</div> <div>Sá</div> <div>Do</div>
+      </div>
+      <div class="days-grid">
+        <div *ngFor="let day of calendarDays"
+             class="day-cell"
+             [class.is-not-month]="!day.isCurrentMonth"
+             [class.selected]="day.dateString === selectedDate()"
+             (click)="selectDay(day)">
+          <span *ngIf="day.isCurrentMonth" class="day-number">{{ day.dayOfMonth }}</span>
+          <div *ngIf="day.balance !== null"
+               class="day-total"
+               [class.positive]="day.balance >= 0"
+               [class.negative]="day.balance < 0">
+            {{ day.balance | currency:'$' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-details-panel
+      [selectedDate]="selectedDate()"
+      (movementAdded)="generateCalendar()">
+    </app-details-panel>
+  </div>
+</div>

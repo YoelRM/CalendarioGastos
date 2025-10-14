@@ -1,1 +1,11 @@
-<p>year-view works!</p>
+<div class="year-view-container">
+  <header class="main-header">
+    <h1>Calendario Financiero {{ year }}</h1>
+    <p>Selecciona un mes para gestionar tus finanzas.</p>
+  </header>
+  <div class="year-grid">
+    <div *ngFor="let month of months; let i = index" class="mini-calendar" (click)="selectMonth(i)">
+      <h3>{{ month }}</h3>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,48 @@
-<p>details-panel works!</p>
+<div *ngIf="selectedDate; else noDaySelected" class="details-panel-container">
+  <div class="movements-container">
+    <h3>Movimientos en el {{ formattedDate }}</h3>
+    <div class="movements-list">
+      <div *ngIf="movements.length === 0" class="no-movements">
+        No hay movimientos para este día.
+      </div>
+      <div *ngFor="let movement of movements" class="movement-item">
+        <span>{{ movement.description }}</span>
+        <span class="dots"></span>
+        <span [ngClass]="movement.type">
+          {{ (movement.type === 'income' ? '+' : '-') + (movement.amount | currency:'$') }}
+        </span>
+      </div>
+    </div>
+    <div *ngIf="movements.length > 0" class="totals-summary">
+      <div class="total-line">
+        <span>Total Gasto en el Día:</span>
+        <span>{{ totalExpenses | currency:'$' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="forms-container">
+    <div class="form-wrapper income-form">
+      <h3>Añadir Ingreso</h3>
+      <form #incomeForm="ngForm" (ngSubmit)="addMovement(incomeForm, 'income')">
+        <input type="text" name="description" placeholder="Descripción (ej. Salario)" ngModel required>
+        <input type="number" name="amount" placeholder="Monto (ej. 1500.00)" ngModel required min="0.01">
+        <button type="submit" [disabled]="incomeForm.invalid">Guardar Ingreso</button>
+      </form>
+    </div>
+    <div class="form-wrapper expense-form">
+      <h3>Añadir Gasto</h3>
+      <form #expenseForm="ngForm" (ngSubmit)="addMovement(expenseForm, 'expense')">
+        <input type="text" name="description" placeholder="Descripción (ej. Supermercado)" ngModel required>
+        <input type="number" name="amount" placeholder="Monto (ej. 50.00)" ngModel required min="0.01">
+        <button type="submit" [disabled]="expenseForm.invalid">Guardar Gasto</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #noDaySelected>
+  <div class="no-day-selected-placeholder">
+    <p>Selecciona un día del calendario para ver sus detalles.</p>
+  </div>
+</ng-template>
