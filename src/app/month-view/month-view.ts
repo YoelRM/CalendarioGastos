@@ -1,7 +1,7 @@
 import { Component,EventEmitter,OnChanges,Input,Output,signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetailsPanel } from '../details-panel/details-panel';
-import { Movement, Movement as MovementService } from '../movement';
+import { Movement, MovementService } from '../movement.service';
 
 
 interface Day {

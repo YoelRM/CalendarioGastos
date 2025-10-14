@@ -1,7 +1,7 @@
 import { Component,EventEmitter,Input,OnChanges,Output,SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Movement, Movement as MovementService } from '../movement';
+import { Movement, MovementService } from '../movement.service';
 
 @Component({
   selector: 'app-details-panel',

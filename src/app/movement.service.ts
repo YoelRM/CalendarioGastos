@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-// Definimos la estructura de un movimiento
+// Aquí definimos la estructura de un movimiento (la interfaz)
 export interface Movement {
   description: string;
   amount: number;
@@ -10,7 +10,7 @@ export interface Movement {
 @Injectable({
   providedIn: 'root'
 })
-export class Movement {
+export class MovementService {
   private movements: { [key: string]: Movement[] } = {};
 
   constructor() {
