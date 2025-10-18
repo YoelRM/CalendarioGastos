@@ -27,7 +27,24 @@ export class MonthView implements OnChanges {
   calendarDays: Day[] = [];
   selectedDate = signal<string | null>(null);
 
+  monthIcon:string | null = null;
   private monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+  private monthIcons = [
+    "assets/Enero.png", // Enero
+    "assets/Febrero.png", // Febrero
+    "assets/Marzo.png", // Marzo
+    "assets/Abril.png", // Abril
+    "assets/Mayo.png", // Mayo
+    "assets/Junio.png", // Junio
+    "assets/Julio.png", // Julio
+    "assets/Agosto.png", // Agosto
+    "assets/Septiembre.png", // Septiembre
+    "assets/Octubre.png", // Octubre
+    "assets/Noviembre.png", // Noviembre
+    "assets/Diciembre.png", // Diciembre
+  ];
+
 
   constructor(private movementService: MovementService) {}
 
@@ -36,7 +53,9 @@ export class MonthView implements OnChanges {
   }
 
   generateCalendar() {
+    
     this.monthName = this.monthNames[this.month];
+    this.monthIcon = this.monthIcons[this.month];
     this.calendarDays = [];
     const firstDay = new Date(this.year, this.month, 1).getDay();
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();

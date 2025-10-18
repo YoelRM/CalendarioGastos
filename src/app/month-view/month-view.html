@@ -1,8 +1,11 @@
 <div class="month-view-container">
   <div class="month-view-header">
     <button (click)="goBack()">← Volver</button>
-    <h2>{{ monthName }} {{ year }}</h2>
-  </div>
+    <h2 class="month-title">
+      <img *ngIf="monthIcon" [src]="monthIcon" [alt]="'Icono de ' + monthName" class="month-icon">
+      <span>{{ monthName }} {{ year }}</span>
+    </h2>
+    </div>
   <div class="month-view-content">
     <div class="calendar-container">
       <div class="weekdays">
