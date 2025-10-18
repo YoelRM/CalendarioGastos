@@ -8,7 +8,7 @@ import { Movement, MovementService } from '../movement.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './details-panel.html',
-  styleUrl: './details-panel.css'
+  styleUrl: './details-panel.scss'
 })
 export class DetailsPanel implements OnChanges {
    @Input() selectedDate: string | null = null;

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './year-view.html',
-  styleUrl: './year-view.css'
+  styleUrl: './year-view.scss'
 })
 export class YearView {
  @Input() year!: number;

@@ -16,7 +16,7 @@ interface Day {
   standalone: true,
   imports: [CommonModule, DetailsPanel],
   templateUrl: './month-view.html',
-  styleUrl: './month-view.css'
+  styleUrl: './month-view.scss'
 })
 export class MonthView implements OnChanges {
   @Input() year!: number;

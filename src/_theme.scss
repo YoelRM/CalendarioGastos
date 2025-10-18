@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+// Configuración de paletas (usa las nuevas APIs)
+$light-primary: mat.m2-define-palette(mat.$m2-blue-palette);
+$light-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$light-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$dark-primary: mat.m2-define-palette(mat.$m2-blue-palette, 700, 300, 900);
+$dark-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$dark-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Tema claro
+$light-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $light-primary,
+    accent: $light-accent,
+    warn: $light-warn,
+  )
+));
+
+// Tema oscuro
+$dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  )
+));

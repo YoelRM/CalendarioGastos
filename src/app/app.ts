@@ -8,7 +8,7 @@ import { MonthView } from './month-view/month-view';
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, YearView, MonthView],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 export class App {
    currentView: 'year' | 'month' = 'year';
