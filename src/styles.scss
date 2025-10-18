@@ -1,29 +1,92 @@
+// src/styles.scss
 @use '@angular/material' as mat;
-@use 'theme' as theme;
+@use 'theme' as theme; // Importa tu _theme.scss
 
+// 1. Incluye los estilos base OBLIGATORIOS de Material
 @include mat.core();
 
+// 2. Define variables CSS para el TEMA CLARO
 :root {
+  // Aplica el tema claro a los componentes de Material
   @include mat.all-component-themes(theme.$light-theme);
+
+  // --- Define tus variables CSS personalizadas usando colores del tema claro ---
+  --background-color: #{mat.get-theme-color(theme.$light-theme, background, background)}; // Fondo base
+  --text-color: #{mat.get-theme-color(theme.$light-theme, foreground, text)}; // Texto base
+  --card-background: #{mat.get-theme-color(theme.$light-theme, background, card)}; // Fondo de tarjetas
+  --border-color: #{mat.get-theme-color(theme.$light-theme, foreground, divider)}; // Color divisor
+  --border-color-darker: #{mat.get-theme-color(theme.$light-theme, foreground, secondary-text)}; // Texto secundario
+  --hover-background: #{mat.get-theme-color(theme.$light-theme, background, hover)}; // Fondo hover
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --shadow-color-hover: rgba(0, 0, 0, 0.1);
+  --month-header-color: #c0392b; // Mantener rojo personalizado
+  --weekday-background: #2c3e50; // Mantener azul personalizado
+  --weekday-text: white;
+  --day-cell-border: var(--border-color);
+  --day-cell-inactive-background: #f8f9f9;
+  --day-cell-hover-background: #ecf0f1;
+  --day-cell-selected-background: #aed6f1;
+  --day-cell-selected-border: #3498db;
+  --income-color: #27ae60;
+  --expense-color: #e74c3c;
+  --placeholder-text: #{mat.get-theme-color(theme.$light-theme, foreground, hint-text)}; // Color de pista
+  --details-border: var(--text-color);
+  --button-text-color: white;
+  --button-income-bg: var(--income-color);
+  --button-income-hover-bg: #229954;
+  --button-expense-bg: var(--month-header-color);
+  --button-expense-hover-bg: #a93226;
+  --dots-color: var(--border-color-darker);
 }
 
+// 3. Define variables CSS para el TEMA OSCURO
 body.dark-theme {
+  // Aplica los *colores* del tema oscuro a los componentes de Material
   @include mat.all-component-colors(theme.$dark-theme);
+
+  // --- Sobrescribe tus variables CSS personalizadas usando colores del tema oscuro ---
+  --background-color: #{mat.get-theme-color(theme.$dark-theme, background, background)};
+  --text-color: #{mat.get-theme-color(theme.$dark-theme, foreground, text)};
+  --card-background: #{mat.get-theme-color(theme.$dark-theme, background, card)};
+  --border-color: #{mat.get-theme-color(theme.$dark-theme, foreground, divider)};
+  --border-color-darker: #{mat.get-theme-color(theme.$dark-theme, foreground, secondary-text)};
+  --hover-background: #{mat.get-theme-color(theme.$dark-theme, background, hover)};
+  --shadow-color: rgba(255, 255, 255, 0.05);
+  --shadow-color-hover: rgba(255, 255, 255, 0.1);
+  --month-header-color: #f1948a; // Rojo claro
+  --weekday-background: #1a2533; // Azul oscuro
+  --weekday-text: var(--text-color);
+  --day-cell-border: var(--border-color);
+  --day-cell-inactive-background: #2a2a2a;
+  --day-cell-hover-background: #3a3a3a;
+  --day-cell-selected-background: #345c7a;
+  --day-cell-selected-border: #5dade2;
+  --income-color: #58d68d; // Verde brillante
+  --expense-color: #f1948a; // Rojo claro
+  --placeholder-text: #{mat.get-theme-color(theme.$dark-theme, foreground, hint-text)};
+  --details-border: var(--border-color-darker);
+  --button-text-color: #121212; // Texto oscuro para botones claros
+  --button-income-bg: var(--income-color);
+  --button-income-hover-bg: #82e0aa;
+  --button-expense-bg: var(--expense-color);
+  --button-expense-hover-bg: #f5b7b1;
+  --dots-color: var(--border-color-darker);
 }
 
-/* Tus estilos personalizados aquí abajo */
+// 4. --- ESTILOS GENERALES (Ahora usan las variables) ---
+html, body { height: 100%; }
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  margin: 0;
-  transition: background-color 0.3s, color 0.3s;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 button {
-   cursor: pointer;
+    cursor: pointer;
     border: 1px solid var(--border-color-darker);
     background-color: var(--card-background);
-    color: var(--text-color); // Hereda color texto
+    color: var(--text-color);
     padding: 8px 12px;
     border-radius: 5px;
     transition: background-color 0.2s;
@@ -60,23 +123,22 @@ button:hover {
     margin: 0 auto;
 }
 .mini-calendar {
-  border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 15px;
     background-color: var(--card-background);
     cursor: pointer;
     box-shadow: 0 2px 5px var(--shadow-color);
     transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-    
 }
 .mini-calendar:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px var(--shadow-color-hover);
 }
 .mini-calendar h3 {
     text-align: center;
     margin: 15px;
-    color: #c0392b;
+    color: var(--month-header-color);
     font-size: 1.2em;
 }
 
@@ -94,7 +156,7 @@ button:hover {
 }
 .month-view-content {
     display: flex;
-    flex-wrap: wrap; /* Para mejor responsividad en pantallas pequeñas */
+    flex-wrap: wrap;
     gap: 30px;
 }
 .calendar-container {
@@ -104,8 +166,8 @@ button:hover {
 .days-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    border-left: 1px solid #e0e0e0;
-    border-top: 1px solid #e0e0e0;
+    border-left: 1px solid var(--day-cell-border);
+    border-top: 1px solid var(--day-cell-border);
 }
 .weekdays {
     display: grid;
@@ -113,31 +175,30 @@ button:hover {
     font-weight: bold;
     text-align: center;
     padding: 10px 0;
-
-    background-color: #2c3e50;
-    color: white;
-    border-bottom: 2px solid #34495e;
-    
+    background-color: var(--weekday-background);
+    color: var(--weekday-text);
+    border-bottom: 2px solid var(--border-color-darker);
 }
 .day-cell {
     position: relative;
     min-height: 90px;
     padding: 8px;
-    border-right: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid var(--day-cell-border);
+    border-bottom: 1px solid var(--day-cell-border);
     cursor: pointer;
     transition: background-color 0.2s;
-    background-color: #fff;
+    background-color: var(--card-background);
 }
 .day-cell.selected {
-    background-color: #aed6f1 !important;
-    border: 2px solid #3498db;
+    background-color: var(--day-cell-selected-background) !important;
+    border: 2px solid var(--day-cell-selected-border);
+    padding: 6px; // Ajuste por borde
 }
 .day-cell:not(.is-not-month):hover {
-    background-color: #ecf0f1;
+    background-color: var(--day-cell-hover-background);
 }
 .day-cell.is-not-month {
-    background-color: #f8f9f9;
+    background-color: var(--day-cell-inactive-background);
     cursor: default;
 }
 .day-number {
@@ -150,8 +211,8 @@ button:hover {
     font-size: 0.9em;
     font-weight: bold;
 }
-.day-total.positive { color: #27ae60; }
-.day-total.negative { color: #e74c3c; }
+.day-total.positive { color: var(--income-color); }
+.day-total.negative { color: var(--expense-color); }
 
 /* --- PANEL DE DETALLES --- */
 .details-panel-container, .no-day-selected-placeholder {
@@ -162,16 +223,16 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed #ccc;
+    border: 2px dashed var(--border-color-darker);
     border-radius: 8px;
-    color: #7f8c8d;
+    color: var(--placeholder-text);
     min-height: 400px;
 }
 .movements-container {
-    border: 2px solid black;
+    border: 2px solid var(--details-border);
     padding: 15px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: var(--card-background);
 }
 .movements-list {
     min-height: 150px;
@@ -183,7 +244,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-color);
 }
 .movement-item span:first-child {
     word-break: break-word;
@@ -191,14 +252,14 @@ button:hover {
 }
 .movement-item .dots {
     flex-grow: 1;
-    border-bottom: 1px dotted #ccc;
+    border-bottom: 1px dotted var(--dots-color);
     margin: 0 5px;
 }
-.movement-item .income { color: #27ae60; font-weight: bold; }
-.movement-item .expense { color: #e74c3c; font-weight: bold; }
+.movement-item .income { color: var(--income-color); font-weight: bold; }
+.movement-item .expense { color: var(--expense-color); font-weight: bold; }
 .totals-summary {
     margin-top: 15px;
-    border-top: 2px solid black;
+    border-top: 2px solid var(--details-border);
     padding-top: 10px;
     font-weight: bold;
 }
@@ -207,7 +268,7 @@ button:hover {
     justify-content: space-between;
 }
 .no-movements {
-    color: #7f8c8d;
+    color: var(--placeholder-text);
     text-align: center;
     padding-top: 40px;
 }
@@ -220,32 +281,44 @@ button:hover {
 .form-wrapper {
     padding: 15px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: var(--card-background);
 }
 .form-wrapper h3 { margin: 0 0 15px 0; }
 .form-wrapper input {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color-darker);
     border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+.form-wrapper input::placeholder {
+    color: var(--placeholder-text);
+    opacity: 1;
 }
 .form-wrapper button {
     width: 100%;
     padding: 12px;
-    color: white;
+    color: var(--button-text-color);
     border: none;
     font-size: 1em;
 }
-.income-form { 
-    border: 2px 
-    solid #27ae60; 
+.income-form {
+    border: 2px solid var(--button-income-bg);
 }
-
-#save-income-btn, .income-form button { 
-    background-color: #27ae60; }
-#save-income-btn:hover, .income-form button:hover { background-color: #229954; }
-.expense-form { border: 2px solid #c0392b; }
-#save-expense-btn, .expense-form button { background-color: #c0392b; }
-#save-expense-btn:hover, .expense-form button:hover { 
-    background-color: #a93226; }
+#save-income-btn, .income-form button {
+    background-color: var(--button-income-bg);
+}
+#save-income-btn:hover, .income-form button:hover {
+    background-color: var(--button-income-hover-bg);
+}
+.expense-form {
+    border: 2px solid var(--button-expense-bg);
+}
+#save-expense-btn, .expense-form button {
+    background-color: var(--button-expense-bg);
+}
+#save-expense-btn:hover, .expense-form button:hover {
+    background-color: var(--button-expense-hover-bg);
+}

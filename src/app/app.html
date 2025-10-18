@@ -1,3 +1,9 @@
+<header class="app-header">
+  <button (click)="toggleTheme()">
+    Cambiar a {{ isDarkMode ? 'Modo Claro' : 'Modo Oscuro' }}
+  </button>
+</header>
+
 <main>
   <app-year-view
     *ngIf="currentView === 'year'"
