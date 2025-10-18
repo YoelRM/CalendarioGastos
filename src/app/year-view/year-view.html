@@ -5,7 +5,10 @@
   </header>
   <div class="year-grid">
     <div *ngFor="let month of months; let i = index" class="mini-calendar" (click)="selectMonth(i)">
-      <h3>{{ month }}</h3>
+      <h3 class="month-title">
+        <img [src]="month.icon" [alt]="'Icono de ' + month.name" class="month-icon">
+        <span>{{ month.name }}</span>
+      </h3>
     </div>
-  </div>
+    </div>
 </div>

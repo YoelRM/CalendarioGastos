@@ -13,7 +13,21 @@ export class YearView {
  @Input() year!: number;
   @Output() monthSelected = new EventEmitter<number>();
 
-  months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  // Convertimos el array de strings a un array de objetos
+  months = [
+    { name: "Enero", icon: "assets/Enero.png" },
+    { name: "Febrero", icon: "assets/Febrero.png" }, 
+    { name: "Marzo", icon: "assets/Marzo.png" },
+    { name: "Abril", icon: "assets/Abril.png" },
+    { name: "Mayo", icon: "assets/Mayo.png" },
+    { name: "Junio", icon: "assets/Junio.png" },
+    { name: "Julio", icon: "assets/Julio.png" },
+    { name: "Agosto", icon: "assets/Agosto.png" },
+    { name: "Septiembre", icon: "assets/Septiembre.png" },
+    { name: "Octubre", icon: "assets/Octubre.png" },
+    { name: "Noviembre", icon: "assets/Noviembre.png" },
+    { name: "Diciembre", icon: "assets/Diciembre.png" }
+  ];
 
   selectMonth(monthIndex: number) {
     this.monthSelected.emit(monthIndex);
